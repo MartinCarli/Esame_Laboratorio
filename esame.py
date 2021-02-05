@@ -62,7 +62,13 @@ class CSVTimeSeriesFile:
                 # Le variabili "epoch" e "temperature" al momento sono ancora una stringa, poiche' ho letto da file di testo, quindi devo convertire i valore in int/float e se nel farlo ho un errore avverto
                 #In questo caso sarebbe un errore "recoverable" e posso proseguire (semplicemente salto la linea)
 
-                #converto il valore di epoch in int
+                #converto il valore di epoch in float 
+                try:
+                    epoch = float(epoch)
+                except:
+                    raise ExamException('Errore nela conversione di epoch a float')
+                    continue
+                #adesso lo convertiamo in int, non potevo fare if isistance(epoch,float), perche all'inizio non e` di tipo float ma e` una stringa
                 try:                           
                     epoch = int(epoch)
                 except:
