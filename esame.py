@@ -103,13 +103,13 @@ class CSVTimeSeriesFile:
                 try:
                     epoch = float(epoch)
                 except:
-                    raise ExamException('Errore nela conversione di epoch a float')
+                    raise ExamException('ATTENZIONE: Errore nela conversione di epoch a float')
                     continue
                 #adesso lo convertiamo in int, non potevo fare if isistance(epoch,float), perche all'inizio non e` di tipo float ma e` una stringa
                 try:                           
                     epoch = int(epoch)
                 except:
-                    raise ExamException('Errore nela conversione di epoch a int')
+                    raise ExamException('ATTENZIONE: Errore nela conversione di epoch a int')
                     continue
 
                 #-----------------------------------------------------
