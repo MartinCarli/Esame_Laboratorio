@@ -4,6 +4,13 @@ class ExamException(Exception):
 
 #creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del del file "data.csv"
 
+
+# Inizializzo una lista vuota per salvare i valori
+#questa lista verra` utilizzata piu volte nel nostro programma non solo in get_data
+
+time_series = []
+
+
 class CSVTimeSeriesFile:
     def __init__(self, name):
         # Setto il nome del file
@@ -12,12 +19,10 @@ class CSVTimeSeriesFile:
 
     def get_data(self):
 
-        # Inizializzo una lista vuota per salvare i valori
-        time_series = []
-        lista_piccola= []  #FORSE NON SERVE  !!!-----------------!!!
-
         #Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file. Essendo un errore "un-recovable" non potro` esseguire il file equindi ritorno None
-
+        
+        #creo una lista piccola che contarra' solo 2 elementi
+        lista_piccola= [] 
         try:
             my_file = open(self.name, 'r')
         except:
@@ -26,6 +31,20 @@ class CSVTimeSeriesFile:
             # Esco dalla funzione tornando "niente".
             return None
         
+
+
+#-------------------------------------------------------
+
+#           fai un rise che ti dece,che se sono piu di 3 elementi, esempio
+            #epoch,temperature, televisione
+            #oppure 23123443,24, 1023
+
+#-------------------------------------------------------
+            
+
+
+
+
 
         # Ora inizio a leggere il file linea per linea
         for line in my_file:
