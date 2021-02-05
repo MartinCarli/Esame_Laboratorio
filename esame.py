@@ -151,4 +151,5 @@ class CSVTimeSeriesFile:
 
 ##------------------------FINE PRIMA PARTE-----------------------------##
 
+##inizio seconda parte
 def daily_stats(time_series):
