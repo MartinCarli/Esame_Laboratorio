@@ -27,6 +27,10 @@ class ExamException(Exception):
 
 
 
+#   FORSE E MEGLIO FARE UNA MINI LISTA CHE SI RESETTA
+
+
+
 
 class CSVTimeSeriesFile:
     def __init__(self, name):
@@ -153,3 +157,10 @@ class CSVTimeSeriesFile:
 
 ##inizio seconda parte
 def daily_stats(time_series):
+
+#   COSE DA FARE;
+#   1. lista per giorni che iniziano alle 00;00
+#   2. MODEL per calcolare quando inizia il giorno
+#   3. fare una lista con tutte le temperature
+#   4. creare lista dei risultati
+#   5. fare le piccole funzioni (min,max,media ecc)
