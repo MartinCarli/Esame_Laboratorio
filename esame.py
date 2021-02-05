@@ -7,7 +7,7 @@
 
 
 
-#       controlla se va bene concettualmente la   "lista_piccola"
+
 
 #       ----------------------------------------------------------------
 
@@ -19,9 +19,6 @@ class ExamException(Exception):
 #creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del del file "data.csv"
 
 
-# Inizializzo una lista vuota per salvare i valori
-
-time_series = []
 
 #         -----PROBABILMENTE NON VA BENE SE LASCIO L VARIABILE FUORI----
 
@@ -48,10 +45,7 @@ class CSVTimeSeriesFile:
         
         # Inizializzo una lista vuota per salvare i valori
 
-        time_series = []
-
-        #creo una lista piccola che contarra' solo 2 elementi. Questa lista si "resettera`" piu` volte
-        lista_piccola= [] 
+        values = []
 
 
         try:
@@ -134,31 +128,25 @@ class CSVTimeSeriesFile:
                     raise ExamException('ATTENZIONE: Non esiste il tempo negativo')
                     continue
 
-                
-                lista_piccola= [epoch,temperature]                
+           
                 
                 # Infine aggiungo alla lista dei valori questo valore
-                time_series.append(lista_piccola)
+                values.append(epoch,temperature)
 
-                #"resetto" la lista_piccola
-                lista_piccola=[0]
         
         # Chiudo il file
         my_file.close()
 
-        x=len(time_series)
-        k=x
 
-        #--------------------------------------------------------------
-        #forse ce un errore, controlla meglio questa PARTE
-        
+        #adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati
 
-        for i in range(1, x/2):
-            for k in range(k,x/2):
-                if time_series[i][0]<=time_series[k][0]:
-                    raise ExamException('ATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata')
-        #-------------------------------------------------------------                    
+        x=len(values)
+
+        for i in range(1, x):
+            if values[i][0]<=values[i-1][0]:
+                raise ExamException('ATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
         # Quando ho processato tutte le righe, ritorno i valori
-        return time_series
+        return values
 
+##------------------------FINE PRIMA PARTE-------------------------------
