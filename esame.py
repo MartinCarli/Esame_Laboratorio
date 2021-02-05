@@ -149,4 +149,5 @@ class CSVTimeSeriesFile:
         # Quando ho processato tutte le righe, ritorno i valori
         return values
 
-##------------------------FINE PRIMA PARTE-------------------------------
+##------------------------FINE PRIMA PARTE-----------------------------##
+
