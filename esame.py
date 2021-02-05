@@ -146,7 +146,18 @@ class CSVTimeSeriesFile:
         # Chiudo il file
         my_file.close()
 
-#     PRIMA DEL RETURN DOVREI CONTROLLARE I DUPLICATI       #
+        x=len(time_series)
+        k=x
+
+        #--------------------------------------------------------------
+        #forse ce un errore, controlla meglio questa PARTE
+        
+
+        for i in range(1, x/2):
+            for k in range(k,x/2):
+                if time_series[i][0]<=time_series[k][0]:
+                    raise ExamException('ATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata')
+        #-------------------------------------------------------------                    
 
         # Quando ho processato tutte le righe, ritorno i valori
         return time_series
