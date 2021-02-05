@@ -45,7 +45,7 @@ class CSVTimeSeriesFile:
         
         # Inizializzo una lista vuota per salvare i valori
 
-        values = []
+        time_series = []
 
 
         try:
@@ -91,7 +91,7 @@ class CSVTimeSeriesFile:
 
 
 
-                # CONTROLLA QUESTA PARTE --------E GIUSTO?-----------------
+                # CONTROLLA QUESTA PARTE --------E GIUSTO????----------
 
                 #converto il valore di epoch in float 
                 try:
@@ -131,7 +131,7 @@ class CSVTimeSeriesFile:
            
                 
                 # Infine aggiungo alla lista dei valori questo valore
-                values.append(epoch,temperature)
+                time_series.append(epoch,temperature)
 
         
         # Chiudo il file
@@ -140,13 +140,15 @@ class CSVTimeSeriesFile:
 
         #adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati
 
-        x=len(values)
+        x=len(time_series)
 
         for i in range(1, x):
-            if values[i][0]<=values[i-1][0]:
+            if time_series[i][0]<=time_series[i-1][0]:
                 raise ExamException('ATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
         # Quando ho processato tutte le righe, ritorno i valori
-        return values
+        return time_series
 
-##------------------------FINE PRIMA PARTE-------------------------------
+##------------------------FINE PRIMA PARTE-----------------------------##
+
+def daily_stats(time_series):
