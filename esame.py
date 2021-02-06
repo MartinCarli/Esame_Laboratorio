@@ -196,3 +196,4 @@ def daily_stats(time_series):
 #   3. fare una lista con tutte le temperature
 #   4. creare lista dei risultati
 #   5. fare le piccole funzioni (min,max,media ecc)
+#   6.riguarda tutto
