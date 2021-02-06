@@ -120,6 +120,10 @@ class CSVTimeSeriesFile:
                     raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
                     continue
 
+
+#   ------------     VANNO BENE LE ECCEZIONI PERLA TEMPERATURA???? ----------
+
+
                 if(temperature>60):
                     raise ExamException('\nATTENZIONE: Temperatura troppo alta')
                     continue
@@ -127,6 +131,8 @@ class CSVTimeSeriesFile:
                 if(temperature<-20):
                     raise ExamException('\nATTENZIONE: Temperatura troppo bassa')
                     continue
+
+#-----------------------------------------------------------------------------
 
                 if epoch<0:
                     raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
@@ -190,9 +196,22 @@ def daily_stats(time_series):
         if len(sottolista)!=2:
             raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
 
+ #  ~~~~~~~~~~~~~          fine delle eccezioni          ~~~~~~~~~~~~~~~
+
+    #   creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) - le  soluzioni dell'esercizio
+    statistiche= []   
+
+    #qui verranno messi i giorni 
+    day_start_epoch= []
+
+    #per prima cosa devo capire se il 
+
+
+
+
 
 #   COSE DA FARE;
-#   1. lista per giorni che iniziano alle 00;00
+#   1. lista per giorni che iniziano dalle 00;00 in poi 
 #   2. MODEL per calcolare quando inizia il giorno
 #   3. fare una lista con tutte le temperature
 #   4. creare lista dei risultati
