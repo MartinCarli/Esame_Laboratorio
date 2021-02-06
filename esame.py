@@ -27,7 +27,7 @@ class ExamException(Exception):
 
 
 
-#   FORSE E MEGLIO FARE UNA MINI LISTA CHE SI RESETTA
+#   FORSE E MEGLIO FARE UNA MINI LISTA CHE SI RESETTA ////// ho aggiunto le parentesi quadre
 
 
 
@@ -158,7 +158,8 @@ class CSVTimeSeriesFile:
 
 #           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#                   CONTROLLA LA QUESTIONE DEI GIORNI 
+#                   CONTROLLA LA QUESTIONE DEI GIORNI
+#                       -sia nella eccezione che dopo per la funzione
 
 #           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -196,4 +197,4 @@ def daily_stats(time_series):
 #   3. fare una lista con tutte le temperature
 #   4. creare lista dei risultati
 #   5. fare le piccole funzioni (min,max,media ecc)
-#   6.riguarda tutto
+#   6. riguarda tutto piu` volte
