@@ -190,6 +190,9 @@ def daily_stats(time_series):
         if len(sottolista)!=2:
             raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
 
+#  ~~~~~~~~~~~~~          fine delle eccezioni          ~~~~~~~~~~~~~~~
+
+
 
 #   COSE DA FARE;
 #   1. lista per giorni che iniziano alle 00;00
