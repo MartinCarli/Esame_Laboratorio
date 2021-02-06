@@ -196,21 +196,34 @@ def daily_stats(time_series):
         if len(sottolista)!=2:
             raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
 
- #  ~~~~~~~~~~~~~          fine delle eccezioni          ~~~~~~~~~~~~~~~
+ #  ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~~~
 
     #   creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) - le  soluzioni dell'esercizio
     statistiche= []   
 
     #qui verranno messi i giorni 
-    day_start_epoch= []
+    ingiorni=[]
 
-    #per prima cosa devo capire se il 
+    #per prima cosa devo capire quali sono le prime informazioni del giorno
+    #informazioni[0] == epoch
+    #uso l'operazione "modulo"
+    for informazioni in time_series:
+        day_start_epoch = informazioni[0] - (informazioni[0] % 86400)
+        #controllo se effetivamente c'e` il valore nella lista ingiorni
+        if day_start_epoch is not in ingiorni:
+            #se non c'e` allora aggiungo il valore
+            ingiorni.append(day_start_epoch)
+    #ricontrolliamo se la lunghezza della lista ingiorni e lunga dai 28 ai 31 giorni
+
+    #--------  SONO GIUSTI QUEI OR?? E QUEI ==? RICONTROLLA ------------
+
+    if not len(ingiorni) == 28 or 29 or  30 or 31:
+        raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
+
+    #-------------------------------------------------------------------
 
 
-
-
-
-#   COSE DA FARE;
+#   COSE DA FARE:
 #   1. lista per giorni che iniziano dalle 00;00 in poi 
 #   2. MODEL per calcolare quando inizia il giorno
 #   3. fare una lista con tutte le temperature
