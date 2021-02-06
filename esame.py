@@ -27,6 +27,10 @@ class ExamException(Exception):
 
 
 
+#   FORSE E MEGLIO FARE UNA MINI LISTA CHE SI RESETTA
+
+
+
 
 class CSVTimeSeriesFile:
     def __init__(self, name):
@@ -51,7 +55,7 @@ class CSVTimeSeriesFile:
         try:
             my_file = open(self.name, 'r')
         except:
-            raise ExamException('ATTENZIONE: Errore nella lettura del file')
+            raise ExamException('\nATTENZIONE: Errore nella lettura del file')
             
             # Esco dalla funzione tornando "niente".
             return None
@@ -68,7 +72,7 @@ class CSVTimeSeriesFile:
             #----------------------------------------------------------
 
             if len(elements != 2):
-                raise ExamException('ATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
+                raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
 
                 continue      
             
@@ -97,13 +101,13 @@ class CSVTimeSeriesFile:
                 try:
                     epoch = float(epoch)
                 except:
-                    raise ExamException('ATTENZIONE: Errore nela conversione di epoch a float')
+                    raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a float')
                     continue
                 #adesso lo convertiamo in int, non potevo fare if isistance(epoch,float), perche all'inizio non e` di tipo float ma e` una stringa
                 try:                           
                     epoch = int(epoch)
                 except:
-                    raise ExamException('ATTENZIONE: Errore nela conversione di epoch a int')
+                    raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a int')
                     continue
 
                 #-----------------------------------------------------
@@ -113,25 +117,25 @@ class CSVTimeSeriesFile:
                 try:
                     temperature= float(temperature)
                 except:
-                    raise ExamException('ATTENZIONE: Errore nella conversione di temperature a float')
+                    raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
                     continue
 
                 if(temperature>60):
-                    raise ExamException('ATTENZIONE: Temperatura troppo alta')
+                    raise ExamException('\nATTENZIONE: Temperatura troppo alta')
                     continue
 
                 if(temperature<-20):
-                    raise ExamException('ATTENZIONE: Temperatura troppo bassa')
+                    raise ExamException('\nATTENZIONE: Temperatura troppo bassa')
                     continue
 
                 if epoch<0:
-                    raise ExamException('ATTENZIONE: Non esiste il tempo negativo')
+                    raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
                     continue
 
            
                 
                 # Infine aggiungo alla lista dei valori questo valore
-                time_series.append(epoch,temperature)
+                time_series.append([epoch,temperature])
 
         
         # Chiudo il file
@@ -144,12 +148,51 @@ class CSVTimeSeriesFile:
 
         for i in range(1, x):
             if time_series[i][0]<=time_series[i-1][0]:
-                raise ExamException('ATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
+                raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
         # Quando ho processato tutte le righe, ritorno i valori
         return time_series
 
 ##------------------------FINE PRIMA PARTE-----------------------------##
 
+
+#           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#                   CONTROLLA LA QUESTIONE DEI GIORNI 
+
+#           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ##inizio seconda parte
 def daily_stats(time_series):
+    #per sicurezza inizio ad alzare qualche eccezione
+
+    #time_series DEVE ESSERE DI TIPO LISTA
+    if not isinstance(time_series,list):
+        raise ExamException('\nATTENZIONE: non e` di tipo lista')
+
+    #un mese ha almeno 28 giorni, quindi alziamo questa eccezione
+    if len(time_series) <=27:
+        raise ExamException('\nATTENZIONE: la lista deve avere almeno 28 informazioni')
+    
+    #ricontrolliamo se c'e` qualche duplicato
+    x=len(time_series)
+
+    for i in range(1, x):
+        if time_series[i][0]<=time_series[i-1][0]:
+            raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
+
+    #adesso guardiamo le mini liste che sono in "time_series"
+
+    for sottolista in time_series:
+        if not isinstance(sottolista,list):
+            raise ExamException('\nATTENZIONE: Le sottoliste non sono di tipo lista')
+        if len(sottolista)!=2:
+            raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
+
+
+#   COSE DA FARE;
+#   1. lista per giorni che iniziano alle 00;00
+#   2. MODEL per calcolare quando inizia il giorno
+#   3. fare una lista con tutte le temperature
+#   4. creare lista dei risultati
+#   5. fare le piccole funzioni (min,max,media ecc)
