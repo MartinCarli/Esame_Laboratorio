@@ -210,7 +210,7 @@ def daily_stats(time_series):
 
 
 
-#   COSE DA FARE;
+#   COSE DA FARE:
 #   1. lista per giorni che iniziano dalle 00;00 in poi 
 #   2. MODEL per calcolare quando inizia il giorno
 #   3. fare una lista con tutte le temperature
