@@ -222,11 +222,3 @@ def daily_stats(time_series):
 
     #-------------------------------------------------------------------
 
-
-#   COSE DA FARE:
-#   1. lista per giorni che iniziano dalle 00;00 in poi 
-#   2. MODEL per calcolare quando inizia il giorno
-#   3. fare una lista con tutte le temperature
-#   4. creare lista dei risultati
-#   5. fare le piccole funzioni (min,max,media ecc)
-#   6. riguarda tutto piu` volte
