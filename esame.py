@@ -71,7 +71,7 @@ class CSVTimeSeriesFile:
             #controllo se nel file ci sono solo 2 valori a riga
             #----------------------------------------------------------
 
-            if len(elements != 2):
+            if len(elements) != 2:
                 raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
 
                 continue      
@@ -123,19 +123,6 @@ class CSVTimeSeriesFile:
                     continue
 
 
-#   ------------     VANNO BENE LE ECCEZIONI PERLA TEMPERATURA???? ----------
-#                 forse no perche non per forza si tratta di una casa
-
-                if(temperature>60):
-                    raise ExamException('\nATTENZIONE: Temperatura troppo alta')
-                    continue
-
-                if(temperature<-20):
-                    raise ExamException('\nATTENZIONE: Temperatura troppo bassa')
-                    continue
-
-#-----------------------------------------------------------------------------
-
 
 #                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
                 if epoch<0:
@@ -186,9 +173,9 @@ def daily_stats(time_series):
         raise ExamException('\nATTENZIONE: la lista deve avere almeno 28 informazioni')
     
     #ricontrolliamo se c'e` qualche duplicato
-    x=len(time_series)
+    length_time_series=len(time_series)
 
-    for i in range(1, x):
+    for i in range(1, length_time_series):
         if time_series[i][0]<=time_series[i-1][0]:
             raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
@@ -203,51 +190,61 @@ def daily_stats(time_series):
  #  ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~~~
 
     #   creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) - le  soluzioni dell'esercizio
-    statistiche= []   
+    statistiche_giornagliere= []   
 
     #qui verranno messi i giorni 
-    ingiorni=[]
+    giorno_inizio=[]
 
     #per prima cosa devo capire quali sono le prime informazioni del giorno
     #informazioni[0] == epoch
     #uso l'operazione "modulo"
+    
+    
+    
     for informazioni in time_series:
         day_start_epoch = informazioni[0] - (informazioni[0] % 86400)
-        #controllo se effetivamente c'e` il valore nella lista ingiorni
-        if day_start_epoch is not in ingiorni:
+        #controllo se effetivamente c'e` il valore nella lista giorno_inizio
+        if day_start_epoch not in giorno_inizio:
             #se non c'e` allora aggiungo il valore
-            ingiorni.append(day_start_epoch)
+            giorno_inizio.append(day_start_epoch)
     #ricontrolliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
+
+
+
+
+
+
+    #              NEL TESTING DAVA MOLTI PROBLEMI
+
 
     #--------  SONO GIUSTI QUEI OR?? E QUEI ==? RICONTROLLA ------------
 
-    if not len(ingiorni) == 28 or 29 or  30 or 31:
+    if not len(giorno_inizio) == 28 or 29 or  30 or 31:
         raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
 
     #-------------------------------------------------------------------
     
-    #usero k per definire i giorni iniziali
-    k=1
-    #ricordiamo che x = len(time_list)
-
-    giorno=[]
-        
     
-    for i in range(1,x):
-   
-        if time_series[i][0]>=ingiorni[k] and time_series[i][0]<ingiorni[k+1]:
-            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
+    
 
-        if time_series[i][0]>ingiorni[k] and time_series[i][0]>=ingiorni[k+1]:
-            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
-            giorno=[]
-            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
-            k++ #passo al prossimo ingiorno
+    length_giorno_inizio= len(giorno_inizio)
 
-        if time_series[i][0]==time_series[x][0]:
-            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+    #ricordiamo che length_time_series= len(time_series)
 
-    return statistiche
+
+#       COMMENTA fai tipo ~~~~ funzione che calcola statistiche, o tipo , funzione principale....
+
+    for i in range(0,length_giorno_inizio):
+        
+        giorno=[]
+        for p in range(0,length_time_series):
+            if(giorno_inizio[i]== time_series[p][0] - (time_series[p][0] % 86400)):
+                giorno.append(time_series[p][1])
+
+        statistiche_giornagliere.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+
+    return statistiche_giornagliere
+
 
 
         
