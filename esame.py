@@ -136,10 +136,12 @@ class CSVTimeSeriesFile:
 
 #-----------------------------------------------------------------------------
 
+
+#                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
                 if epoch<0:
                     raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
                     continue
-
+#----------------------------------------------------------------------------
            
                 
                 # Infine aggiungo alla lista dei valori questo valore
@@ -215,7 +217,7 @@ def daily_stats(time_series):
         if day_start_epoch is not in ingiorni:
             #se non c'e` allora aggiungo il valore
             ingiorni.append(day_start_epoch)
-    #ricontrolliamo se la lunghezza della lista ingiorni e lunga dai 28 ai 31 giorni
+    #ricontrolliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
 
     #--------  SONO GIUSTI QUEI OR?? E QUEI ==? RICONTROLLA ------------
 
@@ -223,4 +225,29 @@ def daily_stats(time_series):
         raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
 
     #-------------------------------------------------------------------
+    
+    #usero k per definire i giorni iniziali
+    k=1
+    #ricordiamo che x = len(time_list)
 
+    giorno=[]
+        
+    #ho aggiunto il -1 perche senno` alla fine ci sarebbe un problema con gli in giorni
+    for i in range(1,x):
+   
+        if time_series[i][0]>=ingiorni[k] and time_series[i][0]<ingiorni[k+1]:
+            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
+
+        if time_series[i][0]>ingiorni[k] and time_series[i][0]>=ingiorni[k+1]:
+            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+            giorno=[]
+            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
+            k++ #passo al prossimo ingiorno
+
+        if time_series[i][0]==time_series[x][0]:
+            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+
+    return statistiche
+
+
+        
