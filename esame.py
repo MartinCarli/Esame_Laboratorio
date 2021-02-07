@@ -55,17 +55,20 @@ class CSVTimeSeriesFile:
                 try:                           
                     epoch = int(epoch)
                 except:
-                    raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a int')
+                    print('\nATTENZIONE: Errore nela conversione di epoch a int')
 
 
                 # Converto il valore della temperatura in float
                 try:
                     temperature= float(temperature)
                 except:
-                    raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
+                    print('\nATTENZIONE: Errore nella conversione di temperature a float')
                 
                 # Infine aggiungo alla lista dei valori questo valore
-                time_series.append([epoch,temperature])
+                try:
+                    time_series.append([epoch,temperature])
+                except:
+                    print('\nATTENZIONE: Ho avuto un problema nell`appendere i valori in time_series')
 
         
         # Chiudo il file
