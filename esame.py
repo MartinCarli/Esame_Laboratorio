@@ -108,22 +108,6 @@ class CSVTimeSeriesFile:
                     temperature= float(temperature)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
-
-
-
-
-
-
-#                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
-                if epoch<0:
-                    raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
-
-#----------------------------------------------------------------------------
-
-
-
-
-
                 
                 # Infine aggiungo alla lista dei valori questo valore
                 time_series.append([epoch,temperature])
