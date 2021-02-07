@@ -114,7 +114,7 @@ def daily_stats(time_series):
             raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
 
     
-    #  ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~~~
+    # ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~
 
 
     #   Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
