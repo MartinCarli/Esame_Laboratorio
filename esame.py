@@ -232,7 +232,7 @@ def daily_stats(time_series):
 
     giorno=[]
         
-    #ho aggiunto il -1 perche senno` alla fine ci sarebbe un problema con gli in giorni
+    
     for i in range(1,x):
    
         if time_series[i][0]>=ingiorni[k] and time_series[i][0]<ingiorni[k+1]:
