@@ -18,20 +18,6 @@ class ExamException(Exception):
 
 #creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del del file "data.csv"
 
-
-
-#         -----PROBABILMENTE NON VA BENE SE LASCIO L VARIABILE FUORI----
-
-#-----------------------------------------------------------------------
-
-
-
-
-#   FORSE E MEGLIO FARE UNA MINI LISTA CHE SI RESETTA ////// ho aggiunto le parentesi quadre
-
-
-
-
 class CSVTimeSeriesFile:
     def __init__(self, name):
         # Setto il nome del file
@@ -45,12 +31,10 @@ class CSVTimeSeriesFile:
 
     def get_data(self):
 
-        #Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file. Essendo un errore "un-recovable" non potro` esseguire il file equindi ritorno None
-        
         # Inizializzo una lista vuota per salvare i valori
-
         time_series = []
 
+        #Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file. Essendo un errore "un-recovable" non potro` esseguire il file e quindi ritorno None
 
         try:
             my_file = open(self.name, 'r')
@@ -71,20 +55,20 @@ class CSVTimeSeriesFile:
             #controllo se nel file ci sono solo 2 valori a riga
             #----------------------------------------------------------
 
-            if len(elements != 2):
+            if len(elements) != 2:
                 raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
 
                 continue      
             
             ####           CONTINUE E` OK? O E` MEGLIO UN ELSE????
+
+            #              FORSE SE NON E GIUSTO DEVO CHIUDERE IL file
+
             #---------------------------------------------------------------
 
 
 
 
-            #FORSE NEL 'IF ELEMENTS[0]!= EPOCH' DOVREI METTERE UN ECCEZIONE??
-
-            # Se NON sto processando l'intestazione...
             if elements[0] != 'epoch':
                     
                 # Setto l epoch ed il valore della temperatura
@@ -97,7 +81,11 @@ class CSVTimeSeriesFile:
 
 
 
+
+
                 # CONTROLLA QUESTA PARTE --------E GIUSTO????----------
+
+                #E` GIUSTO IL CONTINUE?
 
                 #converto il valore di epoch in float 
                 try:
@@ -116,6 +104,10 @@ class CSVTimeSeriesFile:
 
 
 
+
+
+
+                #converto il valore della temperatura in float
                 try:
                     temperature= float(temperature)
                 except:
@@ -123,18 +115,8 @@ class CSVTimeSeriesFile:
                     continue
 
 
-#   ------------     VANNO BENE LE ECCEZIONI PERLA TEMPERATURA???? ----------
-#                 forse no perche non per forza si tratta di una casa
 
-                if(temperature>60):
-                    raise ExamException('\nATTENZIONE: Temperatura troppo alta')
-                    continue
 
-                if(temperature<-20):
-                    raise ExamException('\nATTENZIONE: Temperatura troppo bassa')
-                    continue
-
-#-----------------------------------------------------------------------------
 
 
 #                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
@@ -142,7 +124,11 @@ class CSVTimeSeriesFile:
                     raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
                     continue
 #----------------------------------------------------------------------------
-           
+
+
+
+
+
                 
                 # Infine aggiungo alla lista dei valori questo valore
                 time_series.append([epoch,temperature])
@@ -154,9 +140,9 @@ class CSVTimeSeriesFile:
 
         #adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati
 
-        x=len(time_series)
+        length_time_series=len(time_series)
 
-        for i in range(1, x):
+        for i in range(1, length_time_series):
             if time_series[i][0]<=time_series[i-1][0]:
                 raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
@@ -166,33 +152,27 @@ class CSVTimeSeriesFile:
 ##------------------------FINE PRIMA PARTE-----------------------------##
 
 
-#           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#inizio seconda parte
 
-#                   CONTROLLA LA QUESTIONE DEI GIORNI
-#                       -sia nella eccezione che dopo per la funzione
-
-#           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-##inizio seconda parte
 def daily_stats(time_series):
-    #per sicurezza inizio ad alzare qualche eccezione
 
-    #time_series DEVE ESSERE DI TIPO LISTA
+
+    # NOTAZIONE IMPORTANTE: Queste eccezioni non sono fondamentali, perche ci sono gia` nella funzione precendente, le ho aggiunte perche potrebbe esserci il caso in cui l'utente non usa la prima funzione (CSVTimeSeriesFile) ma passa subito alla seconda
+    
+
+    #time_series DEVE essere di tipo lista
     if not isinstance(time_series,list):
         raise ExamException('\nATTENZIONE: non e` di tipo lista')
 
-    #un mese ha almeno 28 giorni, quindi alziamo questa eccezione
-    if len(time_series) <=27:
-        raise ExamException('\nATTENZIONE: la lista deve avere almeno 28 informazioni')
     
     #ricontrolliamo se c'e` qualche duplicato
-    x=len(time_series)
+    length_time_series=len(time_series)
 
-    for i in range(1, x):
+    for i in range(1, length_time_series):
         if time_series[i][0]<=time_series[i-1][0]:
             raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
 
-    #adesso guardiamo le mini liste che sono in "time_series"
+    #adesso guardiamo le sottoliste che sono in "time_series"
 
     for sottolista in time_series:
         if not isinstance(sottolista,list):
@@ -200,54 +180,60 @@ def daily_stats(time_series):
         if len(sottolista)!=2:
             raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
 
- #  ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~~~
+    
+    #  ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~~~
 
-    #   creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) - le  soluzioni dell'esercizio
-    statistiche= []   
 
-    #qui verranno messi i giorni 
-    ingiorni=[]
+    #   creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
+    statistiche_giornagliere= []   
+
+    #qui verranno messi le "prime" informazioni del giorno
+    giorno_inizio=[]
+
 
     #per prima cosa devo capire quali sono le prime informazioni del giorno
     #informazioni[0] == epoch
     #uso l'operazione "modulo"
+
+    #per le informazioni nella lista "time_series"
     for informazioni in time_series:
+        #uso l' operazione modulo
         day_start_epoch = informazioni[0] - (informazioni[0] % 86400)
-        #controllo se effetivamente c'e` il valore nella lista ingiorni
-        if day_start_epoch is not in ingiorni:
+        #controllo se c'e` effetivamente il valore nella lista giorno_inizio
+        if day_start_epoch not in giorno_inizio:
             #se non c'e` allora aggiungo il valore
-            ingiorni.append(day_start_epoch)
-    #ricontrolliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
+            giorno_inizio.append(day_start_epoch)
+    
+    
 
-    #--------  SONO GIUSTI QUEI OR?? E QUEI ==? RICONTROLLA ------------
+    #definisco la lughezza dei primi valori dei giorni
+    length_giorno_inizio= len(giorno_inizio)
 
-    if not len(ingiorni) == 28 or 29 or  30 or 31:
+    #controlliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
+    if length_giorno_inizio not in [28,29,30,31]:
         raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
 
-    #-------------------------------------------------------------------
-    
-    #usero k per definire i giorni iniziali
-    k=1
-    #ricordiamo che x = len(time_list)
 
-    giorno=[]
-        
-    
-    for i in range(1,x):
-   
-        if time_series[i][0]>=ingiorni[k] and time_series[i][0]<ingiorni[k+1]:
-            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
+#--------------------- FUNZIONE PRINCIPALE -----------------------    
 
-        if time_series[i][0]>ingiorni[k] and time_series[i][0]>=ingiorni[k+1]:
-            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
-            giorno=[]
-            giorno.append(time_series[i][1]) #aggiungo il valore  della temperatura
-            k++ #passo al prossimo ingiorno
+    #nel primo for definiamo i giorni in cui faremo i calcoli
+    #ovvero da 0 fino al numero di giorni del mese
+    for i in range(0,length_giorno_inizio):
+        #definisco la lista giorno, che verra` riscritta ogni volta
+        giorno=[]
 
-        if time_series[i][0]==time_series[x][0]:
-            statistiche.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+        #passiamo al secondo for dove definiremo i valori di ogni giorno
+        for p in range(0,length_time_series):
+            #facciamo il valero sia nel giorno
+            if(giorno_inizio[i]== time_series[p][0] - (time_series[p][0] % 86400)):
+                #se  fa parte del giorno allora nella lista "giorno" mettiamo il valore della temperatura
+                giorno.append(time_series[p][1])
+        #facciamo i calcoli e li mettiamo nella lista "statistiche_giornagliere"
+        statistiche_giornagliere.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+    #ritorniamo il risultato
+    return statistiche_giornagliere
 
-    return statistiche
+
 
 
         
