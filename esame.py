@@ -6,7 +6,7 @@
 ###         CONTROLLA  PER I RAISE SE FARE CONTINUE, OPPURE  NONE, OPPURE ELSE ECC
 
 
-
+#forse nellaparte doveapro il file devo mettere il None
 
 
 #       ----------------------------------------------------------------
@@ -37,12 +37,11 @@ class CSVTimeSeriesFile:
         #Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file. Essendo un errore "un-recovable" non potro` esseguire il file e quindi ritorno None
 
         try:
+            #apro il file (leggendolo)
             my_file = open(self.name, 'r')
         except:
             raise ExamException('\nATTENZIONE: Errore nella lettura del file')
-            
-            # Esco dalla funzione tornando "niente".
-            return None
+ 
 
 
         # Ora inizio a leggere il file linea per linea
@@ -58,9 +57,6 @@ class CSVTimeSeriesFile:
             if len(elements) != 2:
                 raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
 
-                continue      
-            
-            ####           CONTINUE E` OK? O E` MEGLIO UN ELSE????
 
             #              FORSE SE NON E GIUSTO DEVO CHIUDERE IL file
 
@@ -85,20 +81,20 @@ class CSVTimeSeriesFile:
 
                 # CONTROLLA QUESTA PARTE --------E GIUSTO????----------
 
-                #E` GIUSTO IL CONTINUE?
+
 
                 #converto il valore di epoch in float 
                 try:
                     epoch = float(epoch)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a float')
-                    continue
+
                 #adesso lo convertiamo in int, non potevo fare if isistance(epoch,float), perche all'inizio non e` di tipo float ma e` una stringa
                 try:                           
                     epoch = int(epoch)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a int')
-                    continue
+
 
                 #-----------------------------------------------------
 
@@ -112,7 +108,6 @@ class CSVTimeSeriesFile:
                     temperature= float(temperature)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
-                    continue
 
 
 
@@ -122,7 +117,7 @@ class CSVTimeSeriesFile:
 #                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
                 if epoch<0:
                     raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
-                    continue
+
 #----------------------------------------------------------------------------
 
 
