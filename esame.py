@@ -82,6 +82,8 @@ class CSVTimeSeriesFile:
 
 
 
+            #FORSE NEL 'IF ELEMENTS[0]!= EPOCH' DOVREI METTERE UN ECCEZIONE??
+
             # Se NON sto processando l'intestazione...
             if elements[0] != 'epoch':
                     
@@ -122,7 +124,7 @@ class CSVTimeSeriesFile:
 
 
 #   ------------     VANNO BENE LE ECCEZIONI PERLA TEMPERATURA???? ----------
-
+#                 forse no perche non per forza si tratta di una casa
 
                 if(temperature>60):
                     raise ExamException('\nATTENZIONE: Temperatura troppo alta')
@@ -222,11 +224,3 @@ def daily_stats(time_series):
 
     #-------------------------------------------------------------------
 
-
-#   COSE DA FARE:
-#   1. lista per giorni che iniziano dalle 00;00 in poi 
-#   2. MODEL per calcolare quando inizia il giorno
-#   3. fare una lista con tutte le temperature
-#   4. creare lista dei risultati
-#   5. fare le piccole funzioni (min,max,media ecc)
-#   6. riguarda tutto piu` volte
