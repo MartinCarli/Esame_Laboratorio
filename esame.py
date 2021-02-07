@@ -214,7 +214,7 @@ def daily_stats(time_series):
         raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
 
 
-#--------------------- FUNZIONE PRINCIPALE -----------------------    
+#--------------------- FUNZIONE PRINCIPALE ---------------------   
 
     #nel primo for definiamo i giorni in cui faremo i calcoli
     #ovvero da 0 fino al numero di giorni del mese
