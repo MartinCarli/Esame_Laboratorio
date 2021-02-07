@@ -43,26 +43,15 @@ class CSVTimeSeriesFile:
             raise ExamException('\nATTENZIONE: Errore nella lettura del file')
  
 
-
         # Ora inizio a leggere il file linea per linea
         for line in my_file:
             
             # Faccio lo split di ogni linea sulla virgola
             elements = line.split(',')
             
-
             #controllo se nel file ci sono solo 2 valori a riga
-            #----------------------------------------------------------
-
             if len(elements) != 2:
                 raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
-
-
-            #              FORSE SE NON E GIUSTO DEVO CHIUDERE IL file
-
-            #---------------------------------------------------------------
-
-
 
 
             if elements[0] != 'epoch':
@@ -74,33 +63,10 @@ class CSVTimeSeriesFile:
                 # Le variabili "epoch" e "temperature" al momento sono ancora una stringa, poiche' ho letto da file di testo, quindi devo convertire i valore in int/float e se nel farlo ho un errore avverto
                 #In questo caso sarebbe un errore "recoverable" e posso proseguire (semplicemente salto la linea)
 
-
-
-
-
-
-                # CONTROLLA QUESTA PARTE --------E GIUSTO????----------
-
-
-
-                #converto il valore di epoch in float 
-                try:
-                    epoch = float(epoch)
-                except:
-                    raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a float')
-
-                #adesso lo convertiamo in int, non potevo fare if isistance(epoch,float), perche all'inizio non e` di tipo float ma e` una stringa
                 try:                           
                     epoch = int(epoch)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a int')
-
-
-                #-----------------------------------------------------
-
-
-
-
 
 
                 #converto il valore della temperatura in float
@@ -108,22 +74,6 @@ class CSVTimeSeriesFile:
                     temperature= float(temperature)
                 except:
                     raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
-
-
-
-
-
-
-#                  SI USA IL TEMPO NEGATIVO IN QUESTO CASO???/? COTNROLLA
-                if epoch<0:
-                    raise ExamException('\nATTENZIONE: Non esiste il tempo negativo')
-
-#----------------------------------------------------------------------------
-
-
-
-
-
                 
                 # Infine aggiungo alla lista dei valori questo valore
                 time_series.append([epoch,temperature])
@@ -131,7 +81,6 @@ class CSVTimeSeriesFile:
         
         # Chiudo il file
         my_file.close()
-
 
         #adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati
 
