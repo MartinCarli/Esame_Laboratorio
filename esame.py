@@ -215,7 +215,7 @@ def daily_stats(time_series):
         if day_start_epoch is not in ingiorni:
             #se non c'e` allora aggiungo il valore
             ingiorni.append(day_start_epoch)
-    #ricontrolliamo se la lunghezza della lista ingiorni e lunga dai 28 ai 31 giorni
+    #ricontrolliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
 
     #--------  SONO GIUSTI QUEI OR?? E QUEI ==? RICONTROLLA ------------
 
