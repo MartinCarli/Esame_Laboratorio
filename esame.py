@@ -91,9 +91,6 @@ class CSVTimeSeriesFile:
 
 def daily_stats(time_series):
 
-    # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
-    statistiche_giornagliere= []   
-
     # Qui verranno messi le "prime" informazioni del giorno
     giorno_inizio=[]
 
@@ -121,6 +118,10 @@ def daily_stats(time_series):
 
 
 #--------------------- FUNZIONE PRINCIPALE ---------------------   
+
+    # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
+    statistiche_giornagliere= []   
+
 
     # Nel primo for definiamo i giorni in cui faremo i calcoli
     # Ovvero da 0 fino al numero di giorni del mese
