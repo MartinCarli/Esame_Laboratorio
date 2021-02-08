@@ -97,7 +97,6 @@ def daily_stats(time_series):
 
 
     # Per prima cosa devo capire quali sono le prime informazioni del giorno
-    # Uso l'operazione "modulo"
 
     # Per le informazioni nella lista "time_series"
     for informazioni in time_series:
