@@ -24,7 +24,7 @@ class CSVTimeSeriesFile:
         # Inizializzo una lista vuota per salvare i valori
         time_series = []
 
-        # Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file.
+        # Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file
 
         try:
             # Apro il file (leggendolo)
@@ -57,7 +57,6 @@ class CSVTimeSeriesFile:
                 except:
                     print('\nATTENZIONE: Errore nela conversione di epoch a int')
 
-
                 # Converto il valore della temperatura in float
                 try:
                     temperature= float(temperature)
@@ -69,7 +68,6 @@ class CSVTimeSeriesFile:
                     time_series.append([epoch,temperature])
                 except:
                     print('\nATTENZIONE: Ho avuto un problema nell`appendere i valori in time_series')
-
         
         # Chiudo il file
         my_file.close()
@@ -95,9 +93,7 @@ def daily_stats(time_series):
     # Qui verranno messi le "prime" informazioni del giorno
     giorno_inizio=[]
 
-
     # Per prima cosa devo capire quali sono le prime informazioni del giorno
-
     # Per le informazioni nella lista "time_series"
     for informazioni in time_series:
         # Uso l' operazione modulo (ps. informazioni[0] == epoch)
