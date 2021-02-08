@@ -55,17 +55,20 @@ class CSVTimeSeriesFile:
                 try:                           
                     epoch = int(epoch)
                 except:
-                    raise ExamException('\nATTENZIONE: Errore nela conversione di epoch a int')
+                    print('\nATTENZIONE: Errore nela conversione di epoch a int')
 
 
                 # Converto il valore della temperatura in float
                 try:
                     temperature= float(temperature)
                 except:
-                    raise ExamException('\nATTENZIONE: Errore nella conversione di temperature a float')
+                    print('\nATTENZIONE: Errore nella conversione di temperature a float')
                 
                 # Infine aggiungo alla lista dei valori questo valore
-                time_series.append([epoch,temperature])
+                try:
+                    time_series.append([epoch,temperature])
+                except:
+                    print('\nATTENZIONE: Ho avuto un problema nell`appendere i valori in time_series')
 
         
         # Chiudo il file
@@ -84,40 +87,11 @@ class CSVTimeSeriesFile:
 
 ##------------------------FINE PRIMA PARTE-----------------------------##
 
-
 # Inizio seconda parte
 
 def daily_stats(time_series):
 
-
-    # NOTAZIONE IMPORTANTE: Queste eccezioni non sono fondamentali, perche ci sono gia` nella funzione precendente, le ho aggiunte perche potrebbe esserci il caso in cui l'utente non usa la prima funzione (CSVTimeSeriesFile) ma passa subito alla seconda
-    
-
-    # time_series DEVE essere di tipo lista
-    if not isinstance(time_series,list):
-        raise ExamException('\nATTENZIONE: non e` di tipo lista')
-
-    
-    # Ricontrolliamo se c'e` qualche duplicato
-    length_time_series=len(time_series)
-
-    for i in range(1, length_time_series):
-        if time_series[i][0]<=time_series[i-1][0]:
-            raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
-
-    # Adesso guardiamo le sottoliste che sono in "time_series"
-
-    for sottolista in time_series:
-        if not isinstance(sottolista,list):
-            raise ExamException('\nATTENZIONE: Le sottoliste non sono di tipo lista')
-        if len(sottolista)!=2:
-            raise ExamException('\nATTENZIONE: ogni sottolista deve avere due valori')
-
-    
-    # ~~~~~~~~~~~~~         fine delle eccezioni iniziai         ~~~~~~~~~~~~~
-
-
-    #   Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
+    # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
     # Qui verranno messi le "prime" informazioni del giorno
