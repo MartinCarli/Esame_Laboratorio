@@ -1,5 +1,5 @@
 #Martin Carli
-
+#Esame - Laboratorio di Programmazione - 09/02/2021
 
 
 # Definisco la classe che usero` per alzare le eccezioni
@@ -108,18 +108,14 @@ def daily_stats(time_series):
             # Se non c'e` allora aggiungo il valore
             giorno_inizio.append(day_start_epoch)
 
-    # Definisco la lughezza dei primi valori dei giorni
-    length_giorno_inizio= len(giorno_inizio)
-
-    # Controlliamo se la lunghezza della lista giorno_inizio e` lunga dai 28 ai 31 giorni (lughezza di un mese)
-    if length_giorno_inizio not in [28,29,30,31]:
-        raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
-
 
 #--------------------- FUNZIONE PRINCIPALE ---------------------   
 
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
     statistiche_giornagliere= []   
+
+    # Definisco la lughezza dei primi valori dei giorni
+    length_giorno_inizio= len(giorno_inizio)
 
     # Definisco la lunghezza della lista time_series
     length_time_series= len(time_series)
