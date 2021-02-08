@@ -77,6 +77,7 @@ class CSVTimeSeriesFile:
 
         length_time_series=len(time_series)
 
+        # Controllo riga per riga se c'e`qualche valore di epoch che e` minoreo uguale del precedente
         for i in range(1, length_time_series):
             if time_series[i][0]<=time_series[i-1][0]:
                 raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
@@ -111,7 +112,7 @@ def daily_stats(time_series):
     # Definisco la lughezza dei primi valori dei giorni
     length_giorno_inizio= len(giorno_inizio)
 
-    # Controlliamo se la lunghezza della lista ingiorni e` lunga dai 28 ai 31 giorni
+    # Controlliamo se la lunghezza della lista giorno_inizio e` lunga dai 28 ai 31 giorni (lughezza di un mese)
     if length_giorno_inizio not in [28,29,30,31]:
         raise ExamException('\nATTENZIONE: Un mese deve avere dai 28 ai 31 giorni')
 
@@ -121,7 +122,6 @@ def daily_stats(time_series):
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
-
     # Nel primo for definiamo i giorni in cui faremo i calcoli
     # Ovvero da 0 fino al numero di giorni del mese
     for i in range(0,length_giorno_inizio):
@@ -130,7 +130,7 @@ def daily_stats(time_series):
 
         # Passiamo al secondo for dove definiremo i valori di ogni giorno
         for p in range(0,length_time_series):
-            # Facciamo il valero sia nel giorno
+            # controlliamo se il valore e` nel giorno (usando sempre l operazione modulo)
             if(giorno_inizio[i]== time_series[p][0] - (time_series[p][0] % 86400)):
                 # Se  fa parte del giorno allora nella lista "giorno" mettiamo il valore della temperatura
                 giorno.append(time_series[p][1])
