@@ -120,6 +120,9 @@ def daily_stats(time_series):
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
+    # Definisco la lunghezza della lista time_series
+    length_time_series= len(time_series)
+
     # Nel primo for definiamo i giorni in cui faremo i calcoli
     # Ovvero da 0 fino al numero di giorni del mese
     for i in range(0,length_giorno_inizio):
