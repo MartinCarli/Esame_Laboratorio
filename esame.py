@@ -5,7 +5,7 @@
 class ExamException(Exception):
     pass
 
-# Creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del del file "data.csv"
+# Creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del file "data.csv"
 
 class CSVTimeSeriesFile:
     def __init__(self, name):
@@ -23,7 +23,7 @@ class CSVTimeSeriesFile:
         # Inizializzo una lista vuota per salvare i valori
         time_series = []
 
-        # Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file. Essendo un errore "un-recovable" non potro` esseguire il file e quindi ritorno None
+        # Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file.
 
         try:
             # Apro il file (leggendolo)
@@ -50,7 +50,6 @@ class CSVTimeSeriesFile:
                 temperature = elements[1]
                 
                 # Le variabili "epoch" e "temperature" al momento sono ancora una stringa, poiche' ho letto da file di testo, quindi devo convertire i valore in int/float e se nel farlo ho un errore avverto
-                #In questo caso sarebbe un errore "recoverable" e posso proseguire (semplicemente salto la linea)
 
                 try:                           
                     epoch = int(epoch)
