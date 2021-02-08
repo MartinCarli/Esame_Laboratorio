@@ -138,8 +138,3 @@ def daily_stats(time_series):
         statistiche_giornagliere.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
     # Ritorniamo il risultato
     return statistiche_giornagliere
-
-
-
-
-        
