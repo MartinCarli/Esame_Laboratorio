@@ -106,8 +106,6 @@ def daily_stats(time_series):
         if day_start_epoch not in giorno_inizio:
             # Se non c'e` allora aggiungo il valore
             giorno_inizio.append(day_start_epoch)
-    
-    
 
     # Definisco la lughezza dei primi valori dei giorni
     length_giorno_inizio= len(giorno_inizio)
