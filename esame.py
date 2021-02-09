@@ -106,12 +106,13 @@ def daily_stats(time_series):
             giorno_inizio.append(day_start_epoch)
 
 
-#--------------------- FUNZIONE PRINCIPALE ---------------------   
+##------------------------ FUNZIONE PRINCIPALE ------------------------##
+
 
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
-    # Definisco la lughezza dei primi valori dei giorni
+    # Definisco la lughezza dei primi valori dei giorni (ovvero di quanti giorni e` composto il mese)
     length_giorno_inizio= len(giorno_inizio)
 
     # Definisco la lunghezza della lista time_series
@@ -119,7 +120,7 @@ def daily_stats(time_series):
 
     # Nel primo for definiamo i giorni in cui faremo i calcoli (sarebbe come dire "per ogni giorno del mese")
     for i in range(0,length_giorno_inizio):
-        # Definisco la lista giorno, che verra` riscritta ogni volta
+        # Definisco la lista giorno che verra` riscritta ogni volta
         giorno=[]
 
         # Passiamo al secondo for dove definiremo i valori di ogni giorno
