@@ -27,13 +27,10 @@ class CSVTimeSeriesFile:
         time_series = []
 
         # Per prima cosa provo ad aprire il file per estrarre i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` l'utente che c'e`stato un errore all'apertura del file
-
         try:
-            # Apro il file (leggendolo)
             my_file = open(self.name, 'r')
         except:
             raise ExamException('\nATTENZIONE: Errore nella lettura del file')
- 
 
         # Ora inizio a leggere il file linea per linea
         for line in my_file:
@@ -44,7 +41,6 @@ class CSVTimeSeriesFile:
             # Controllo se nel file ci sono solo 2 valori a riga
             if len(elements) != 2:
                 raise ExamException('\nATTENZIONE: Il nel file ci dovrebbero essere solo due valori a riga, ovvero l` epoch e la temperatura') 
-
 
             if elements[0] != 'epoch':
                     
