@@ -21,7 +21,6 @@ class CSVTimeSeriesFile:
         self.name = name        
         
 
-
     def get_data(self):
 
         # Inizializzo una lista vuota per salvare i valori
