@@ -134,3 +134,4 @@ def daily_stats(time_series):
         
     # Ritorniamo il risultato
     return statistiche_giornagliere
+    
