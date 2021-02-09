@@ -49,7 +49,6 @@ class CSVTimeSeriesFile:
                 temperature = elements[1]
                 
                 # Le variabili "epoch" e "temperature" al momento sono ancora una stringa, poiche' ho letto da file di testo, quindi devo convertire i valore in int/float e se nel farlo ho un errore avverto
-
                 try:                           
                     epoch = int(epoch)
                 except:
@@ -61,7 +60,7 @@ class CSVTimeSeriesFile:
                 except:
                     print('\nATTENZIONE: Errore nella conversione di temperature a float')
                 
-                # Infine aggiungo alla lista dei valori questo valore
+                # Infine aggiungo alla lista time_series i due valori (epoch e temperature)
                 try:
                     time_series.append([epoch,temperature])
                 except:
@@ -70,6 +69,7 @@ class CSVTimeSeriesFile:
         # Chiudo il file
         my_file.close()
 
+        # definisco la lunghezza della lista time_series
         length_time_series=len(time_series)
 
         # Controllo se la lista e` vuota
@@ -117,7 +117,7 @@ def daily_stats(time_series):
     # Definisco la lunghezza della lista time_series
     length_time_series= len(time_series)
 
-    # Nel primo for definiamo i giorni in cui faremo i calcoli
+    # Nel primo for definiamo i giorni in cui faremo i calcoli (sarebbe come dire "per ogni giorno del mese")
     for i in range(0,length_giorno_inizio):
         # Definisco la lista giorno, che verra` riscritta ogni volta
         giorno=[]
@@ -126,7 +126,7 @@ def daily_stats(time_series):
         for p in range(0,length_time_series):
             # controlliamo se il valore e` nel giorno (usando sempre l operazione modulo)
             if(giorno_inizio[i]== time_series[p][0] - (time_series[p][0] % 86400)):
-                # Se  fa parte del giorno allora nella lista "giorno" mettiamo il valore della temperatura
+                # Se fa parte del giorno allora nella lista "giorno" mettiamo il valore della temperatura
                 giorno.append(time_series[p][1])
         # Facciamo i calcoli e li mettiamo nella lista "statistiche_giornagliere"
         statistiche_giornagliere.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
