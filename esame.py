@@ -10,13 +10,16 @@ class ExamException(Exception):
 # Creo la classe CSVTimeSeriesFile con cui stampero` le informazioni del file "data.csv"
 class CSVTimeSeriesFile:
     def __init__(self, name):
-        # Setto il nome del file
-        self.name = name
-        # Adesso alzo qualche eccezione
+
+        # Alzo qualche eccezione
         if not isinstance(name,str):
             raise ExamException('\nATTENZIONE: Il nome del file deve essere di tipo stringa')
         if(name== ''):
             raise ExamException('\nATTENZIONE: Il file deve avere un nome')
+        
+        # Setto il nome del file
+        self.name = name        
+        
 
 
     def get_data(self):
@@ -24,7 +27,7 @@ class CSVTimeSeriesFile:
         # Inizializzo una lista vuota per salvare i valori
         time_series = []
 
-        # Per prima cosa provo ad aprire il file per estrare i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` all'utente che c'e`stato un errore all'apertura del file
+        # Per prima cosa provo ad aprire il file per estrarre i dati. Nel caso in cui non riesca allora alzo un eccezione che informera` l'utente che c'e`stato un errore all'apertura del file
 
         try:
             # Apro il file (leggendolo)
@@ -72,15 +75,14 @@ class CSVTimeSeriesFile:
         # Chiudo il file
         my_file.close()
 
-
         length_time_series=len(time_series)
 
-        # Controllo se la lista contiene almeno 28 elementi (une per giorno)
-        if length_time_series<=27:
-            raise ExamException('\nATTENZIONE: La lista time_series deve contenere almeno 28 informazioni (una informazione per giorno')
+        # Controllo se la lista e` vuota
+        if length_time_series==0:
+            raise ExamException('\nATTENZIONE: La lunghezza della lista non deve essere uguale a 0')
 
         # Adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati         
-        # Controllo riga per riga se c'e`qualche valore di epoch che e` minoreo uguale del precedente
+        # Controllo riga per riga se c'e`qualche valore di epoch che e` minore o uguale al precedente
         for i in range(1, length_time_series):
             if time_series[i][0]<=time_series[i-1][0]:
                 raise ExamException('\nATTENZIONE: C`e` un problema con la lista(duplicati/lista non ordinata)')
@@ -98,7 +100,6 @@ def daily_stats(time_series):
     giorno_inizio=[]
 
     # Per prima cosa devo capire quali sono le prime informazioni del giorno
-    # Per le informazioni nella lista "time_series"
     for informazioni in time_series:
         # Uso l' operazione modulo (ps. informazioni[0] == epoch)
         day_start_epoch = informazioni[0] - (informazioni[0] % 86400)
@@ -110,7 +111,7 @@ def daily_stats(time_series):
 
 #--------------------- FUNZIONE PRINCIPALE ---------------------   
 
-    # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le  soluzioni dell'esercizio
+    # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
     # Definisco la lughezza dei primi valori dei giorni
@@ -120,7 +121,6 @@ def daily_stats(time_series):
     length_time_series= len(time_series)
 
     # Nel primo for definiamo i giorni in cui faremo i calcoli
-    # Ovvero da 0 fino al numero di giorni del mese
     for i in range(0,length_giorno_inizio):
         # Definisco la lista giorno, che verra` riscritta ogni volta
         giorno=[]
@@ -136,4 +136,3 @@ def daily_stats(time_series):
         
     # Ritorniamo il risultato
     return statistiche_giornagliere
-    
