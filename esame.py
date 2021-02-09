@@ -90,7 +90,9 @@ class CSVTimeSeriesFile:
         # Quando ho processato tutte le righe, ritorno i valori
         return time_series
 
+
 ##------------------------FINE PRIMA PARTE-----------------------------##
+
 
 # Inizio seconda parte
 
