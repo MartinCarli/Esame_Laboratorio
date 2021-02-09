@@ -78,7 +78,7 @@ class CSVTimeSeriesFile:
         # Controllo se la lista contiene almeno 28 elementi (une per giorno)
         if length_time_series<=27:
             raise ExamException('\nATTENZIONE: La lista time_series deve contenere almeno 28 informazioni (una informazione per giorno')
-            
+
         # Adesso controllo se la lista e` ordinata e di conseguenza se ci sono duplicati         
         # Controllo riga per riga se c'e`qualche valore di epoch che e` minoreo uguale del precedente
         for i in range(1, length_time_series):
@@ -133,5 +133,6 @@ def daily_stats(time_series):
                 giorno.append(time_series[p][1])
         # Facciamo i calcoli e li mettiamo nella lista "statistiche_giornagliere"
         statistiche_giornagliere.append([min(giorno), max(giorno), sum(giorno)/len(giorno)])
+        
     # Ritorniamo il risultato
     return statistiche_giornagliere
