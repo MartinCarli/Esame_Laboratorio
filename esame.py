@@ -106,7 +106,8 @@ def daily_stats(time_series):
             giorno_inizio.append(day_start_epoch)
 
 
-#--------------------- FUNZIONE PRINCIPALE ---------------------   
+##------------------------ FUNZIONE PRINCIPALE ------------------------##
+
 
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le soluzioni dell'esercizio
     statistiche_giornagliere= []   
