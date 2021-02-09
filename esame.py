@@ -93,10 +93,10 @@ class CSVTimeSeriesFile:
 
 def daily_stats(time_series):
 
-    # Qui verranno messi le "prime" informazioni del giorno
+    # Qui verranno definiti i giorni
     giorno_inizio=[]
 
-    # Per prima cosa devo capire quali sono le prime informazioni del giorno
+    # Per prima cosa li devo definire 
     for informazioni in time_series:
         # Uso l' operazione modulo (ps. informazioni[0] == epoch)
         day_start_epoch = informazioni[0] - (informazioni[0] % 86400)
@@ -112,7 +112,7 @@ def daily_stats(time_series):
     # Creo una lista dove verranno salvate tutte le informazioni dei giorni (min,max,media) ovvero le soluzioni dell'esercizio
     statistiche_giornagliere= []   
 
-    # Definisco la lughezza dei primi valori dei giorni (ovvero di quanti giorni e` composto il mese)
+    # Definisco la lughezza della lista giorno_inizio (ovvero di quanti giorni e` composto il mese)
     length_giorno_inizio= len(giorno_inizio)
 
     # Definisco la lunghezza della lista time_series
